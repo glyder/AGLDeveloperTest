@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace AGL.DeveloperTest.Models
 {
-    public enum Gender
+    public enum GenderType
     {
         Unknown=0,
 

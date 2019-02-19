@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace AGL.DeveloperTest.Models
 {
     /// <summary>
@@ -34,8 +31,8 @@ namespace AGL.DeveloperTest.Models
             }
         }
 
-        [System.ComponentModel.DefaultValue(Gender.Unknown)]
-        public Gender Gender { get; set; }
+        [System.ComponentModel.DefaultValue(GenderType.Unknown)]
+        public GenderType Gender { get; set; }
 
         [System.ComponentModel.DefaultValue(0)]
         public int Age { get; set; }
@@ -45,14 +42,14 @@ namespace AGL.DeveloperTest.Models
         #region "Constructors"
 
         public Person(string name,
-                      Gender Gender = Gender.Unknown)
+                      GenderType Gender = GenderType.Unknown)
         {
             _firstName = name;
         }
 
         public Person(string firstName, 
                       string lastName, 
-                      Gender Gender = Gender.Unknown)
+                      GenderType Gender = GenderType.Unknown)
         {
             _firstName = firstName;
             _lastName = lastName;

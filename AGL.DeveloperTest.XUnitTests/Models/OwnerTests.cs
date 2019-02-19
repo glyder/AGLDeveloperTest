@@ -1,7 +1,6 @@
-﻿using System;
-using System.Linq;
+﻿using Xunit;
+
 using AGL.DeveloperTest.Models;
-using Xunit;
 
 namespace AGL.DeveloperTest.XUnitTests
 {
@@ -16,11 +15,11 @@ namespace AGL.DeveloperTest.XUnitTests
         const int TestAge = 18;
 
         [Fact]
-        [Trait("Category", "Unit")]
+        [Trait("Category", "Models")]
         public void CreateOwner_CanCreate_True()
         {
             // Arrange
-            Owner _owner = new Owner(NAME, Gender.Male);
+            Owner _owner = new Owner(NAME, GenderType.Male);
 
             // Act
 
@@ -29,11 +28,11 @@ namespace AGL.DeveloperTest.XUnitTests
         }
 
         [Fact]
-        [Trait("Category", "Unit")]
+        [Trait("Category", "Models")]
         public void OwnerFullName_CanGet_True()
         {
             // Arrange
-            Owner _owner = new Owner(FIRST, LAST, Gender.Male);
+            Owner _owner = new Owner(FIRST, LAST, GenderType.Male);
 
             // Act
 
@@ -43,11 +42,11 @@ namespace AGL.DeveloperTest.XUnitTests
 
 
         [Fact]
-        [Trait("Category", "Unit")]
+        [Trait("Category", "Models")]
         public void OwnerAge_SetGetAge_True()
         {
             //Arrange
-            Owner _owner = new Owner(NAME, Gender.Male);
+            Owner _owner = new Owner(NAME, GenderType.Male);
 
             //Act
             _owner.Age = TestAge;

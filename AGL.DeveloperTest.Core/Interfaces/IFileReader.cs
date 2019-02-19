@@ -4,8 +4,8 @@ using System.Text;
 
 namespace AGL.DeveloperTest.Core
 {
-    public interface ISerializer<T>
+    public interface IFileReader
     {
-        IList<T> DeserializeURL(string url);
+        string Get(string path);
     }
 }

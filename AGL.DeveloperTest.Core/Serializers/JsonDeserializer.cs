@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 using Newtonsoft.Json;
 
 namespace AGL.DeveloperTest.Core
 {
-    public class JsonSerializer<T> : ISerializer<T>
+    public class JsonDeserializer<T> : IDeserializer<T>
     {
         public IList<T> DeserializeURL(string s)
         {
