@@ -11,7 +11,7 @@ namespace CoreTests
     {
         [Fact]
         [Trait("Category", "Core")]
-        public void JsonDeserializer_ConvertStringToPerson_True()
+        public void Deserialize_StringToListOwners_True()
         {
             // Arrange
             string fileText = base.helperGetSONFromFile(PEOPLE_FILE_JSON);

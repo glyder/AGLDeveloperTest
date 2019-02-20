@@ -4,14 +4,19 @@ using Xunit;
 using AGL.DeveloperTest.Business;
 using AGL.DeveloperTest.Models;
 
-namespace Business
+namespace BusinessTests
 {
     public class OwnerRepositoryTests
     {
-        [Fact]
+        // [Fact(Skip = "To be mocked")]
+        [SkippableFact]
+
+        [Trait("Category", "Internet")]
         [Trait("Category", "Business")]
         public async void OwnerRepositoryGet_RetrievePersonListLive_True()
         {
+            Skip.If(true);
+
             // Arrange
             OwnerRepository op = new OwnerRepository();
 
@@ -31,5 +36,6 @@ namespace Business
             Assert.Equal("Garfield", list[0].Pets[0].Name);
             Assert.Equal("Cat", list[0].Pets[0].Type);
         }
+
     }
 }

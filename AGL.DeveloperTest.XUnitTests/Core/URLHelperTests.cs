@@ -9,13 +9,13 @@ namespace CoreTests
 
         [Fact]
         [Trait("Category", "Business")]
-        public void URLHelper_GetFullURL_True()
+        public void URLHelper_GetFullEndpointUrl_True()
         {
             // Arrange
             URLHelper urlHelper = new URLHelper();
 
             // Act
-            string url = urlHelper.GetFullUrl("people.json");
+            string url = urlHelper.GetFullEndpointUrl("people.json");
 
             // Assert
             Assert.Equal(@"http://agl-developer-test.azurewebsites.net/people.json",
