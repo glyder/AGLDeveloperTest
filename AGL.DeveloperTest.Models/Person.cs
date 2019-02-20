@@ -1,4 +1,6 @@
 ﻿
+using Newtonsoft.Json;
+
 namespace AGL.DeveloperTest.Models
 {
     /// <summary>
@@ -9,13 +11,17 @@ namespace AGL.DeveloperTest.Models
     {
         #region "Properties - private"
 
+        [JsonIgnore]
         private string _firstName { get; set; }
+
+        [JsonIgnore]
         private string _lastName { get; set; }
 
         #endregion
 
         #region "Properites - public"
 
+        [JsonProperty("name")]
         public string Name
         {
             get
@@ -29,17 +35,36 @@ namespace AGL.DeveloperTest.Models
                     return _firstName ?? string.Empty;
                 }
             }
+
+            set
+            {
+                _firstName = value;
+            }
         }
 
-        [System.ComponentModel.DefaultValue(GenderType.Unknown)]
-        public GenderType Gender { get; set; }
+        [JsonProperty("gender")]
+        public string Gender { get; set; }
 
+        [JsonIgnore]
+        [System.ComponentModel.DefaultValue(GenderType.Unknown)]
+        public GenderType GenderType { get; set; }
+
+        [JsonProperty("age")]
         [System.ComponentModel.DefaultValue(0)]
         public int Age { get; set; }
 
         #endregion
 
         #region "Constructors"
+
+        public Person(string name,
+                      string gender,
+                      int age)
+        {
+            this._firstName = name;
+            this.Gender = gender;
+            this.Age = age;
+        }
 
         public Person(string name,
                       GenderType Gender = GenderType.Unknown)

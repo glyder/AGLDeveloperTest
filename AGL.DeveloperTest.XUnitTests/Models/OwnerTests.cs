@@ -2,7 +2,7 @@
 
 using AGL.DeveloperTest.Models;
 
-namespace AGL.DeveloperTest.XUnitTests
+namespace ModelsTests
 {
     public class OwnerTests
     {

@@ -4,6 +4,6 @@ namespace AGL.DeveloperTest.Core
 {
     public interface IDeserializer<T>
     {
-        IList<T> DeserializeURL(string url);
+        IList<T> DeserializeText(string text);
     }
 }

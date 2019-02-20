@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AGL.DeveloperTest.XUnitTest
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AGL.DeveloperTest.Models", "AGL.DeveloperTest.Models\AGL.DeveloperTest.Models.csproj", "{9EB5CDE5-BCA2-49F5-977A-CBF03365F40E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AGL.DeveloperTest.Business", "AGL.DeveloperTest.Business\AGL.DeveloperTest.Business.csproj", "{A834BBD3-7897-4B1A-B617-0ACFD8A12CED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{9EB5CDE5-BCA2-49F5-977A-CBF03365F40E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9EB5CDE5-BCA2-49F5-977A-CBF03365F40E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9EB5CDE5-BCA2-49F5-977A-CBF03365F40E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A834BBD3-7897-4B1A-B617-0ACFD8A12CED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A834BBD3-7897-4B1A-B617-0ACFD8A12CED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A834BBD3-7897-4B1A-B617-0ACFD8A12CED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A834BBD3-7897-4B1A-B617-0ACFD8A12CED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +70,7 @@ Global
 		{F4EAE33B-10D6-4FB9-8F3F-0F2A1FF635D3} = {4CF99612-C259-431E-B0CF-7A487AB8AF95}
 		{940C91BE-77E1-4CC9-8D91-B6C8B13C9CA4} = {A677E7A3-946D-4142-AA9B-1C59888A4724}
 		{9EB5CDE5-BCA2-49F5-977A-CBF03365F40E} = {5BDC8930-4403-4747-BA48-E9AC53320792}
+		{A834BBD3-7897-4B1A-B617-0ACFD8A12CED} = {189CC279-237F-4038-AAA3-EA207E0A668B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3AD047D8-2329-4BFC-9CE7-FF0F55B8CB46}

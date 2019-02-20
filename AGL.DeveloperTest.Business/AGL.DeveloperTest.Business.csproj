@@ -5,7 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <ProjectReference Include="..\AGL.DeveloperTest.Core\AGL.DeveloperTest.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Serialization\" />
   </ItemGroup>
 
 </Project>

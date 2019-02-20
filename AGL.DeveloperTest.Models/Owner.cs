@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 
+using Newtonsoft.Json;
+
 namespace AGL.DeveloperTest.Models
 {
     /// <summary>
@@ -7,7 +9,18 @@ namespace AGL.DeveloperTest.Models
     /// </summary>
     public class Owner : Person
     {
-        public ICollection<Pets> Pets { get; set; }
+        public IList<Pets> Pets { get; set; }
+
+        [JsonConstructor]
+        public Owner(string name, string gender, int age) : base(name, gender, age)
+        {
+
+        }
+
+        public Owner(string name, GenderType gender, int age) : base(name, gender)
+        {
+            this.Age = age;
+        }
 
         public Owner(string name, GenderType gender) : base(name, gender)
         {
@@ -19,9 +32,5 @@ namespace AGL.DeveloperTest.Models
 
         }
 
-        public Owner(string name, GenderType gender, int age) : base(name, gender)
-        {
-            base.Age = age;
-        }
     }
 }

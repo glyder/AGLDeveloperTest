@@ -1,13 +1,17 @@
-﻿using AGL.DeveloperTest.Core;
-using Xunit;
+﻿using Xunit;
 
-namespace AGL.DeveloperTest.XUnitTests.Core
+using AGL.DeveloperTest.Core;
+
+namespace CoreTests
 {
     public class HttpHelperTests
     {
+        #region "Properties"
 
         const string GOOGLEURL = "http://google.com";
         const string AGLWEBURL = "http://agl-developer-test.azurewebsites.net/people.json";
+
+        #endregion
 
         [Fact]
         [Trait("Category", "Core")]

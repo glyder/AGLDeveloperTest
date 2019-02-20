@@ -6,9 +6,9 @@ namespace AGL.DeveloperTest.Core
 {
     public class JsonDeserializer<T> : IDeserializer<T>
     {
-        public IList<T> DeserializeURL(string s)
+        public IList<T> DeserializeText(string text)
         {
-            return JsonConvert.DeserializeObject<List<T>>(s);
+            return JsonConvert.DeserializeObject<IList<T>>(text);
         }
     }
 
