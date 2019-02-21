@@ -1,21 +1,33 @@
 ﻿using System.Collections.Generic;
 using Xunit;
 
+using AGL.Base;
 using AGL.DeveloperTest.Business;
 using AGL.DeveloperTest.Models;
+using System;
 
 namespace BusinessTests
 {
-    public class OwnerRepositoryTests
+    public class OwnerRepositoryTests : IDisposable
     {
-        // [Fact(Skip = "To be mocked")]
-        [SkippableFact]
+        public OwnerRepositoryTests()
+        {
 
+        }
+
+        public void Dispose()
+        {
+
+        }
+
+
+        [Fact] // (Skip = "To be mocked")]
+        //[SkippableFact]
         [Trait("Category", "Internet")]
         [Trait("Category", "Business")]
         public async void OwnerRepositoryGet_RetrievePersonListLive_True()
         {
-            Skip.If(true);
+            // Skip.If(true);
 
             // Arrange
             OwnerRepository op = new OwnerRepository();

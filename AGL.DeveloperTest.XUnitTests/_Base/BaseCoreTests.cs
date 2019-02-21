@@ -1,9 +1,20 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace AGL.Base
 {
-    public abstract class BaseTests
+    public abstract class BaseTests : IDisposable
     {
+        protected BaseTests()
+        {
+            // Do "global" initialization here; Called before every test method.
+        }
+
+        public void Dispose()
+        {
+            // Do "global" teardown here; Called after every test method.
+        }
+
         #region "Properties"
 
         public readonly string PEOPLE_FILE_JSON = Directory.GetCurrentDirectory() + 
