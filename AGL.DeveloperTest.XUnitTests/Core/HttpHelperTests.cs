@@ -13,7 +13,7 @@ namespace CoreTests
 
         #endregion
 
-        [Fact(Skip = "To be mocked")]
+        [Fact] // (Skip = "To be mocked")]
         [Trait("Category", "Internet")]
         [Trait("Category", "Core")]
         public async void GetWebContent_FromGoogleUrl_True()
@@ -30,7 +30,7 @@ namespace CoreTests
             Assert.StartsWith("<!doctype html>", responseText);
         }
 
-        [Fact(Skip = "To be mocked")]
+        [Fact] // (Skip = "To be mocked")]
         [Trait("Category", "Internet")]
         [Trait("Category", "Core")]
         public async void GetJSONContent_FromAGLUrl_True()

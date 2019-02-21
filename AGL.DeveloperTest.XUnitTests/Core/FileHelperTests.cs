@@ -5,7 +5,7 @@ using AGL.DeveloperTest.Core;
 
 namespace CoreTests
 {
-    public class FileHelperTests : BaseCoreTests
+    public class FileHelperTests : BaseTests
     {
         [Fact]
         [Trait("Category", "TestHelper")]

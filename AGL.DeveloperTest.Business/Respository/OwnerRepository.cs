@@ -16,7 +16,7 @@ namespace AGL.DeveloperTest.Business
     public class OwnerRepository : IRepository<Owner>
     {
         #region Properties
-        private readonly ILogger _logger;
+        // private readonly ILogger _logger;
 
         private IURLHelper _urlHelper;
         private IHttpClient _httpClient;

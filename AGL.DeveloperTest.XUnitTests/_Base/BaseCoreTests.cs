@@ -2,12 +2,14 @@
 
 namespace AGL.Base
 {
-    public abstract class BaseCoreTests
+    public abstract class BaseTests
     {
         #region "Properties"
 
         public readonly string PEOPLE_FILE_JSON = Directory.GetCurrentDirectory() + 
                                                   @"\_Data\people.json";
+
+        public readonly bool runLiveTests = true;
 
         #endregion
 

@@ -13,4 +13,9 @@
     <ProjectReference Include="..\AGL.DeveloperTest.Models\AGL.DeveloperTest.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Formatters\" />
+    <Folder Include="Sorters\" />
+  </ItemGroup>
+
 </Project>

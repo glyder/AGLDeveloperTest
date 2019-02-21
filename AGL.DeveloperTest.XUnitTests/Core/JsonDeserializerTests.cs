@@ -7,7 +7,7 @@ using AGL.DeveloperTest.Core;
 
 namespace CoreTests
 {
-    public class JsonDeserializerTests : BaseCoreTests
+    public class JsonDeserializerTests : BaseTests
     {
         [Fact]
         [Trait("Category", "Core")]
