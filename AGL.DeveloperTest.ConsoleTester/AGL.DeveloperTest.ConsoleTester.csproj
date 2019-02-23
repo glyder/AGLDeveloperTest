@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AGL.DeveloperTest.Core\AGL.DeveloperTest.Core.csproj" />
+    <ProjectReference Include="..\AGL.DeveloperTest.Services\AGL.DeveloperTest.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>

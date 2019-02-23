@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
-using AGL.DeveloperTest.Core;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.FileExtensions;
 using Microsoft.Extensions.Configuration.Json;
@@ -10,7 +12,10 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
 using Microsoft.Extensions.Options;
 
+using AGL.DeveloperTest.Models;
+using AGL.DeveloperTest.Services;
 
+using AGL.DeveloperTest.ConsoleTester.Config;
 
 namespace AGL.DeveloperTest.ConsoleTester
 {
@@ -21,37 +26,42 @@ namespace AGL.DeveloperTest.ConsoleTester
     {
         static void Main(string[] args)
         {
-            MySettingsConfig configRoot;
-            EndpointsConfig configEndpoints;
+            string peopleGetUrl = "";
+
+            #region "Config / appSettings"
+
+            IConfigurationRoot config = ConfigHelper.ConfigBuild();
+            peopleGetUrl = ConfigHelper.GetURLByEndpoint(config, "people");
+
+            #endregion
 
 
-            // Config Build
-            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory())
-                                                    .AddJsonFile("appsettings.json");
-            var config = builder.Build();
-
-            // Get appsettings.json
-            Configuration(config, out configRoot, out configEndpoints);
-
-
-            IURLHelper urlHelper = new URLHelper(configRoot.BaseUrl);
-            var fullURL = urlHelper.GetFullEndpointUrl(configRoot.BaseUrl,
-                                                       configEndpoints.Owner);
-            Console.WriteLine($"{ fullURL }");
+            MainAsync(args).GetAwaiter().GetResult();
 
             Console.ReadLine();
         }
 
-        private static void Configuration(IConfigurationRoot config, 
-                                          out MySettingsConfig configRoot, 
-                                          out EndpointsConfig configEndpoints)
+        static async Task MainAsync(string[] args)
         {
-            // Config - Root/Main
-            configRoot = new MySettingsConfig(config["author"],
-                                              config["baseUrl"]);
-            // Config - Endpoints
-            configEndpoints = config.GetSection("endpoints").Get<EndpointsConfig>();
+            IOwnerService ownerService = new OwnerService();
+
+            IList<Owner> ownerFemaleList = await ownerService.GetByGender("Female", true);
+            IList<Owner> ownerMaleList = await ownerService.GetByGender("Male", true);
+
+            Console.WriteLine("Female");
+            foreach (var owner in ownerFemaleList)
+            {
+                Console.WriteLine($"\t{owner.Name}");
+            }
+
+            Console.WriteLine("Male");
+            foreach (var owner in ownerMaleList)
+            {
+                Console.WriteLine($"\t{owner.Name}");
+            }
+
         }
+
     }
 
     #region DummyClasses

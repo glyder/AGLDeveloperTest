@@ -35,6 +35,7 @@
     <ProjectReference Include="..\AGL.DeveloperTest.Business\AGL.DeveloperTest.Business.csproj" />
     <ProjectReference Include="..\AGL.DeveloperTest.Core\AGL.DeveloperTest.Core.csproj" />
     <ProjectReference Include="..\AGL.DeveloperTest.Models\AGL.DeveloperTest.Models.csproj" />
+    <ProjectReference Include="..\AGL.DeveloperTest.Services\AGL.DeveloperTest.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>

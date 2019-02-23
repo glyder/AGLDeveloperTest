@@ -9,7 +9,7 @@ using AGL.DeveloperTest.Core;
 
 namespace IntegrationTests
 {
-    public class OwnerRepositoryIntegrationTests
+    public class OwnerServiceTests
     {
         // [Fact(Skip = "To be mocked")]
         [SkippableFact]
