@@ -12,6 +12,7 @@ namespace AGL.DeveloperTest.Services
 {
     public interface IOwnerService
     {
+        Task<IList<IGrouping<string, Owner>>> GetAll();
         Task<IList<Owner>> GetByGender(string gender, bool sortByName = false);
     }
 
@@ -24,7 +25,7 @@ namespace AGL.DeveloperTest.Services
         IHttpClient _httpClient = null;
 
         IDeserializer<Owner> _deserializerOwner = null;
-        ILinqSorterOwner<Owner> _sortOwner = null;
+        ILinqSorterOwner _sortOwner;
 
         // Business
         IOwnerRepository<Owner> _repositoryOwner = null;
@@ -40,31 +41,60 @@ namespace AGL.DeveloperTest.Services
         {
             _urlHelper = new URLHelper(@"http://agl-developer-test.azurewebsites.net");
             _httpClient = new HttpHelper();
-            _deserializerOwner = new JsonDeserializer<Owner>();
+            _deserializerOwner = new DeserializerJson<Owner>();
 
             _repositoryOwner = new OwnerRepository(_urlHelper,
                                                    _httpClient,
                                                    _deserializerOwner);
-            _sortOwner = new LinqSorterOwner<Owner>();
+            _sortOwner = new LinqSorterOwner();
         }
 
         public OwnerService(IURLHelper urlHelper,
                             IHttpClient httpClient,
                             IDeserializer<Owner> deserializer,
-                            ILinqSorterOwner<Owner> linqSorter,
-                            IOwnerRepository<Owner> repositoryOwner)
+                            IOwnerRepository<Owner> repositoryOwner,
+                            ILinqSorterOwner linqSorter)
         {
             _urlHelper = urlHelper;
             _httpClient = httpClient;
             _deserializerOwner = deserializer;
-            _sortOwner = linqSorter;
 
             _repositoryOwner = new OwnerRepository(_urlHelper,
                                                    _httpClient,
                                                    _deserializerOwner);
-        } 
+
+            _sortOwner = linqSorter;
+        }
 
         #endregion
+
+        public async Task<IList<IGrouping<string, Owner>>> GetAll()
+        {
+            try
+            {
+                IList<Owner> _listOwnerByGender = await _repositoryOwner.GetAll();
+
+                if (_listOwnerByGender.Any())
+                {
+
+                    IList<IGrouping<string, Owner>> sortedListOwnerByGender = _sortOwner.SortGroupByGender(_listOwnerByGender);
+
+
+                    return sortedListOwnerByGender;
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                new Logger().Log(LoggingEventType.Error, ex.Message);
+                throw ex;
+            }
+        }
+
 
         public async Task<IList<Owner>> GetByGender(string gender, bool sortByName=false)
         {
@@ -75,7 +105,7 @@ namespace AGL.DeveloperTest.Services
                 if (sortByName && 
                     _listOwnerByGender.Any()) {
 
-                    IList<IGrouping<string, Owner>> sortedListOwnerByGender = _sortOwner.SortGroupBy(_listOwnerByGender);
+                    IList<IGrouping<string, Owner>> sortedListOwnerByGender = _sortOwner.SortGroupByGender(_listOwnerByGender);
 
 
                     _listOwnerByGender = sortedListOwnerByGender[0].GroupBy(x => x.Gender)

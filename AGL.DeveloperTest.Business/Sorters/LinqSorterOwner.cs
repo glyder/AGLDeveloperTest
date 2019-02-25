@@ -5,20 +5,27 @@ using AGL.DeveloperTest.Models;
 
 namespace AGL.DeveloperTest.Business
 {
-
-
-    public class LinqSorterOwner<T> : ILinqSorterOwner<T>
+    public class LinqSorterOwner : ILinqSorterOwner
     {
-        public IList<IGrouping<string, Owner>> SortGroupBy(IList<Owner> list)
+        public IList<IGrouping<string, Owner>> SortGroupByGender(IList<Owner> list)
         {
-            var ownerList = list.OrderBy(p => p.Gender)
-                                .ThenBy(p => p.Name)           // ThenByDescending
-                                .Where(p => p.Pets != null)
-                                .GroupBy(p => p.Gender)
+            var ownerList = list.OrderBy(o => o.Gender)
+                                .ThenBy(o => o.Name)
+                                .Where(o => o.Pets != null)
+                                .GroupBy(o => o.Gender)
                                 .ToList();
 
             return ownerList;
         }
 
+        public List<Pets> SortGroupByPetType(IGrouping<string, Owner> personGroupList,
+                                         string petType = "cat")
+        {
+            var petList = personGroupList.SelectMany(p => p.Pets)
+                                         .Where(c => c.Type.ToLower().Equals(petType))
+                                         .OrderBy(p => p.Name).ToList();
+
+            return petList;
+        }
     }
 }

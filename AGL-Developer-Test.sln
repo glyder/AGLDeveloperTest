@@ -25,8 +25,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AGL.DeveloperTest.CloudAPI", "AGL.DeveloperTest.CloudAPI\AGL.DeveloperTest.CloudAPI.csproj", "{F4EAE33B-10D6-4FB9-8F3F-0F2A1FF635D3}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AGL.DeveloperTest.XUnitTests", "AGL.DeveloperTest.XUnitTests\AGL.DeveloperTest.XUnitTests.csproj", "{940C91BE-77E1-4CC9-8D91-B6C8B13C9CA4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AGL.DeveloperTest.Models", "AGL.DeveloperTest.Models\AGL.DeveloperTest.Models.csproj", "{9EB5CDE5-BCA2-49F5-977A-CBF03365F40E}"
@@ -34,12 +32,15 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AGL.DeveloperTest.Business", "AGL.DeveloperTest.Business\AGL.DeveloperTest.Business.csproj", "{A834BBD3-7897-4B1A-B617-0ACFD8A12CED}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "60. API", "60. API", "{807FD079-4C8A-45F4-9AFB-DE51B4658605}"
+	ProjectSection(SolutionItems) = preProject
+		not-used.txt = not-used.txt
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "80. Tests", "80. Tests", "{72D88E8A-5B02-48B2-9B50-AF568B7DEAD0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AGL.DeveloperTest.ConsoleTester", "AGL.DeveloperTest.ConsoleTester\AGL.DeveloperTest.ConsoleTester.csproj", "{D4F67EFB-9C7E-458E-9DC1-72494BFE4346}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AGL.DeveloperTest.Services", "AGL.DeveloperTest.Services\AGL.DeveloperTest.Services.csproj", "{0DB58F3D-1D61-404E-A648-F6B7819223A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AGL.DeveloperTest.Services", "AGL.DeveloperTest.Services\AGL.DeveloperTest.Services.csproj", "{0DB58F3D-1D61-404E-A648-F6B7819223A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,10 +52,6 @@ Global
 		{11403D49-C6AD-440A-A15A-E6620F689BEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11403D49-C6AD-440A-A15A-E6620F689BEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11403D49-C6AD-440A-A15A-E6620F689BEB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F4EAE33B-10D6-4FB9-8F3F-0F2A1FF635D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F4EAE33B-10D6-4FB9-8F3F-0F2A1FF635D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F4EAE33B-10D6-4FB9-8F3F-0F2A1FF635D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F4EAE33B-10D6-4FB9-8F3F-0F2A1FF635D3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{940C91BE-77E1-4CC9-8D91-B6C8B13C9CA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{940C91BE-77E1-4CC9-8D91-B6C8B13C9CA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{940C91BE-77E1-4CC9-8D91-B6C8B13C9CA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -81,7 +78,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{11403D49-C6AD-440A-A15A-E6620F689BEB} = {E831C910-34E4-4A04-A4F5-C3BE884C05B9}
-		{F4EAE33B-10D6-4FB9-8F3F-0F2A1FF635D3} = {807FD079-4C8A-45F4-9AFB-DE51B4658605}
 		{940C91BE-77E1-4CC9-8D91-B6C8B13C9CA4} = {72D88E8A-5B02-48B2-9B50-AF568B7DEAD0}
 		{9EB5CDE5-BCA2-49F5-977A-CBF03365F40E} = {5BDC8930-4403-4747-BA48-E9AC53320792}
 		{A834BBD3-7897-4B1A-B617-0ACFD8A12CED} = {189CC279-237F-4038-AAA3-EA207E0A668B}

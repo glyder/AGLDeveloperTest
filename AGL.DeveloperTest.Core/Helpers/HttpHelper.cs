@@ -20,15 +20,21 @@ namespace AGL.DeveloperTest.Core
             }
         }
 
+        /// <summary>
+        /// For Testing purpose inject MOQs here
+        /// </summary>
+        /// <param name="httpClient"></param>
+        public HttpHelper(HttpClient httpClient)
+        {
+            HttpClient = httpClient;
+        }
+
         public async Task<string> Get(string url)
         {
             // Call url in thread
-            HttpResponseMessage response = await HttpClient.GetAsync(url);
+            string response = await HttpClient.GetStringAsync(url);
 
-            // Get content
-            var content = await response.Content.ReadAsStringAsync();
-
-            return content;
+            return response;
         }
 
     }

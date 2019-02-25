@@ -17,17 +17,13 @@ namespace AGL.DeveloperTest.Models
 
         }
 
-        public Owner(string name, GenderType gender, int age) : base(name, gender)
-        {
-            this.Age = age;
-        }
 
-        public Owner(string name, GenderType gender) : base(name, gender)
+        public Owner(string name, string gender) : base(name, gender)
         {
 
         }
 
-        public Owner(string first, string last, GenderType gender) : base(first, last, gender)
+        public Owner(string first, string last, string gender) : base(first, last, gender)
         {
 
         }

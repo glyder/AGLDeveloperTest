@@ -58,26 +58,27 @@ namespace AGL.DeveloperTest.Models
         #region "Constructors"
 
         public Person(string name,
-                      string gender,
-                      int age)
+                      string gender = "unknown",
+                      int age = 0)
         {
             this._firstName = name;
-            this.Gender = gender;
             this.Age = age;
+            this.Gender = gender;
         }
 
         public Person(string name,
-                      GenderType Gender = GenderType.Unknown)
+                      string gender = "unknown")
         {
             _firstName = name;
         }
 
         public Person(string firstName, 
                       string lastName, 
-                      GenderType Gender = GenderType.Unknown)
+                      string gender = "unknown")
         {
             _firstName = firstName;
             _lastName = lastName;
+
         }
 
         #endregion 

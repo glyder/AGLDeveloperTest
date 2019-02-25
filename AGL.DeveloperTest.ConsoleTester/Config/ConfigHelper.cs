@@ -40,8 +40,6 @@ namespace AGL.DeveloperTest.ConsoleTester.Config
             IURLHelper urlHelper = new URLHelper(configRoot.BaseUrl);
             var fullURL = urlHelper.GetFullEndpointUrl(configRoot.BaseUrl,
                                                        configEndpoints.Owner);
-            Console.WriteLine($"{ fullURL }");
-
             return fullURL;
         }
 

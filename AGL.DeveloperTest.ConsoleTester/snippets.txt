@@ -1,0 +1,34 @@
+﻿
+
+            // https://garywoodfine.com/configuration-api-net-core-console-application/
+
+RichardSzalay.MockHttp(5.0.0)
+
+													  
+            #region "Obsolete - Testing code"
+            var female = ownersAll.First();
+            var male = ownersAll.Skip(1).First();
+
+
+            IList<Owner> ownerFemaleList = await ownerService.GetByGender("Female", true);
+            IList<Owner> ownerMaleList = await ownerService.GetByGender("Male", true);
+
+            Console.WriteLine("Female");
+            foreach (var owner in ownerFemaleList)
+            {
+                Console.WriteLine($"\t{owner.Name}");
+                foreach (var pet in owner.Pets)
+                {
+
+                }
+            }
+
+            values.Select(o =>
+            {
+                Console.WriteLine($"\u2022 {o.Name}");
+                String.Join(Environment.NewLine, o.Pets.Select(p => { Console.WriteLine($"\t{p.Name}"); return p; }).ToList());
+                return o;
+            })
+          .ToList();
+
+            #endregion

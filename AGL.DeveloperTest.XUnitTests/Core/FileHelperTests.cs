@@ -7,6 +7,10 @@ namespace CoreTests
 {
     public class FileHelperTests : BaseTests
     {
+
+
+
+
         [Fact]
         [Trait("Category", "TestHelper")]
         public void JSONPeopleSampleData_CanBeRead_True()

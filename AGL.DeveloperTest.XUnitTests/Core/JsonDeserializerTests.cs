@@ -7,7 +7,7 @@ using AGL.DeveloperTest.Core;
 
 namespace CoreTests
 {
-    public class JsonDeserializerTests : BaseTests
+    public class DeserializerJsonTests : BaseTests
     {
         [Fact]
         [Trait("Category", "Core")]
@@ -15,7 +15,7 @@ namespace CoreTests
         {
             // Arrange
             string fileText = base.helperGetSONFromFile(PEOPLE_FILE_JSON);
-            IDeserializer<Owner> serializer = new JsonDeserializer<Owner>();
+            IDeserializer<Owner> serializer = new DeserializerJson<Owner>();
 
             // Act
             IList<Owner> resultOwner = serializer.DeserializeText(fileText);
@@ -27,11 +27,11 @@ namespace CoreTests
 
         [Fact]
         [Trait("Category", "Core")]
-        public void JsonDeserializer_PersonJSONParametersMappedCorrectly_True()
+        public void DeserializerJson_PersonJSONParametersMappedCorrectly_True()
         {
             // Arrange
             string fileText = base.helperGetSONFromFile(PEOPLE_FILE_JSON);
-            IDeserializer<Owner> serializer = new JsonDeserializer<Owner>();
+            IDeserializer<Owner> serializer = new DeserializerJson<Owner>();
 
             // Act
             IList<Owner> resultOwner = serializer.DeserializeText(fileText);

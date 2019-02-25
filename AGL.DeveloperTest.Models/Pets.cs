@@ -12,6 +12,17 @@ namespace AGL.DeveloperTest.Models
     /// </summary>
     public class Pets
     {
+        public Pets()
+        {
+
+        }
+
+        public Pets(string name, string type)
+        {
+            Name = name;
+            Type = type;
+        }
+
         [JsonProperty("name")]
         public string Name { get; set; }
 

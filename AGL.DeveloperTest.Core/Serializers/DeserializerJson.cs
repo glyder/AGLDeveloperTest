@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace AGL.DeveloperTest.Core
 {
-    public class JsonDeserializer<T> : IDeserializer<T>
+    public class DeserializerJson<T> : IDeserializer<T>
     {
         public IList<T> DeserializeText(string text)
         {

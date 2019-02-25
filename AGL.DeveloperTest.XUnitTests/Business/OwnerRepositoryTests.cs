@@ -1,36 +1,45 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+
 using Xunit;
+using Moq;
 
 using AGL.Base;
 using AGL.DeveloperTest.Business;
 using AGL.DeveloperTest.Models;
-using System;
+using AGL.DeveloperTest.Core;
 
 namespace BusinessTests
 {
-    public class OwnerRepositoryTests : IDisposable
+    public class OwnerRepositoryTests : BaseTests, IDisposable
     {
         public OwnerRepositoryTests()
         {
-
+            
         }
 
-        public void Dispose()
+        public override void Dispose()
         {
-
+            base.Dispose();
         }
 
 
         [Fact] // (Skip = "To be mocked")]
         //[SkippableFact]
-        [Trait("Category", "Internet")]
         [Trait("Category", "Business")]
-        public async void OwnerRepositoryGet_RetrievePersonListLive_True()
+        public async void OwnerRepositoryGet_RetrievePersonListMoq_True()
         {
             // Skip.If(true);
 
             // Arrange
-            OwnerRepository op = new OwnerRepository();
+            Mock<IURLHelper> _urlHelper = base.MoqURLHelper();
+            IHttpClient _httpClient = await base.MockHttpClient();
+            Mock<IDeserializer<Owner>> _deserializer = base.MoqDeserializerOwner();
+
+            OwnerRepository op = new OwnerRepository(_urlHelper.Object,
+                                                     _httpClient,
+                                                     _deserializer.Object);
 
             // Act
             IList<Owner> list = await op.GetAll();
@@ -48,6 +57,26 @@ namespace BusinessTests
             Assert.Equal("Garfield", list[0].Pets[0].Name);
             Assert.Equal("Cat", list[0].Pets[0].Type);
         }
+
+
+        [SkippableFact]
+        [Trait("Category", "Business")]
+        public async Task OwnerRepositoryGet_ConstructorNullsThrowBubbleException_True()
+        {
+            Skip.If(false);
+
+            // Arrange
+            IURLHelper _urlHelper = null;
+            IHttpClient _httpClient = null;
+            IDeserializer<Owner> _deserializer = null;
+
+            OwnerRepository op = new OwnerRepository(_urlHelper,
+                                                     _httpClient,
+                                                     _deserializer);
+
+            await Assert.ThrowsAsync<NullReferenceException>(() => op.GetAll());
+        }
+
 
     }
 }

@@ -6,7 +6,6 @@ namespace AGL.DeveloperTest.Core
     public class URLHelper : IURLHelper
     {
         public string BaseURL = @"http://agl-developer-test.azurewebsites.net";
-
         public string EndPoint = @"people.json";
 
         public URLHelper()

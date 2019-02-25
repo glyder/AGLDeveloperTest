@@ -6,8 +6,10 @@ using AGL.DeveloperTest.Models;
 
 namespace AGL.DeveloperTest.Business
 {
-    public interface ILinqSorterOwner<T>
+    public interface ILinqSorterOwner
     {
-        IList<IGrouping<string, Owner>> SortGroupBy(IList<Owner> list);
+        IList<IGrouping<string, Owner>> SortGroupByGender(IList<Owner> list);
+        List<Pets> SortGroupByPetType(IGrouping<string, Owner> personGroup,
+                                      string petType = "cat");
     }
 }

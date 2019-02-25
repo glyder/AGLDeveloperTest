@@ -14,47 +14,46 @@ namespace ModelsTests
 
         const int TestAge = 18;
 
-        [Fact]
+
+        [Theory]
+        [InlineData(NAME, "Male", NAME)]
+        [InlineData("George Pagotelis", "Male", "George Pagotelis")]
         [Trait("Category", "Models")]
-        public void CreateOwner_CanCreate_True()
+        public void CreateOwner_CanCreate_True(string name,
+                                               string gender,
+                                               string expected)
+                                                
         {
             // Arrange
-            Owner _owner = new Owner(NAME, GenderType.Male);
+            Owner _owner = null;
 
             // Act
+            _owner = new Owner(name, gender);
 
             // Assert
-            Assert.Equal(NAME, _owner.Name);
+            Assert.Equal(expected, _owner.Name);
         }
 
-        [Fact]
+
+        [Theory]
+        [InlineData("George", "", "Male", "George")]
+        [InlineData("George", "Pagotelis", "Male", "George Pagotelis")]
+        [InlineData(FIRST, LAST, "Female", FULLNAME)]
         [Trait("Category", "Models")]
-        public void OwnerFullName_CanGet_True()
+        public void OwnerFullName_CanGet_True(string firstName,
+                                              string lastName,
+                                               string gender,
+                                               string expected)
         {
             // Arrange
-            Owner _owner = new Owner(FIRST, LAST, GenderType.Male);
+            Owner _owner = null;
 
             // Act
+            _owner = new Owner(firstName, lastName, gender);
 
             // Assert
-            Assert.Equal(FULLNAME, _owner.Name);
+            Assert.Equal(expected, _owner.Name);
         }
-
-
-        [Fact]
-        [Trait("Category", "Models")]
-        public void OwnerAge_SetGetAge_True()
-        {
-            //Arrange
-            Owner _owner = new Owner(NAME, GenderType.Male);
-
-            //Act
-            _owner.Age = TestAge;
-
-            //Assert
-            Assert.Equal(TestAge, _owner.Age);
-        }
-
 
     }
 
