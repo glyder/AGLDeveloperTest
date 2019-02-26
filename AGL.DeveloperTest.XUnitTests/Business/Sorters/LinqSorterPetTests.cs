@@ -37,9 +37,9 @@ namespace BusinessTests
             _deserializer = base.MoqDeserializerOwner();
             _sortOwner = new LinqSorterOwner();
 
-            _repositoryOwner = new OwnerRepository(_urlHelper.Object,
-                                                   _httpClient,
-                                                   _deserializer.Object);
+            _repositoryOwner = new OwnerRepository<Owner>(_urlHelper.Object,
+                                                           _httpClient,
+                                                           _deserializer.Object);
         }
 
         public override void Dispose()

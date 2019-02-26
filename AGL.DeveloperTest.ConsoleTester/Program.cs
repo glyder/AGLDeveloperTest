@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using AGL.DeveloperTest.ConsoleTester.Config;
 using AGL.DeveloperTest.Business;
 using AGL.DeveloperTest.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AGL.DeveloperTest.ConsoleTester
 {
@@ -15,38 +16,36 @@ namespace AGL.DeveloperTest.ConsoleTester
     {
         static void Main(string[] args)
         {
-            MainAsync(args).GetAwaiter().GetResult();
+            // create service collection
+            var serviceCollection = new ServiceCollection();
+            ConfigServices.ConfigureServices(serviceCollection);
+
+            // create service provider
+            var serviceProvider = serviceCollection.BuildServiceProvider();
+
+            // entry to run app
+            serviceProvider.GetService<AppTest>().Run();
+
+            MainAsync(args, serviceProvider).GetAwaiter().GetResult();
 
             Console.ReadLine();
         }
 
-        static async Task MainAsync(string[] args)
+        static async Task MainAsync(string[] args, 
+                                    ServiceProvider serviceProvider)
         {
-            string urlPeopleJSON = "";
 
             #region "Config / appSettings"
 
+            string urlPeopleJSON = "";
             IConfigurationRoot config = ConfigHelper.ConfigBuild();
             urlPeopleJSON = ConfigHelper.GetURLByEndpoint(config, "people");
 
             #endregion
 
-            #region "Owner Data / Formatter"
-
-            // Define Services/Formatters
-            IOwnerService ownerService = new OwnerService();
-            IConsoleFormatterOwner ownerConsoleFormatter = new ConsoleFormatterOwner();
-
-            // Get Data via service
-            var listOwnerGrouping = await ownerService.GetAll();
-
-            // Console write data with formatter
-            // ownerConsoleFormatter.DisplayAllByGender(listOwnerGrouping);
-            ownerConsoleFormatter.DisplayAllByGenderPets(listOwnerGrouping);
-
-            #endregion
-
+            await serviceProvider.GetService<App>().Run();
         }
+
     }
 
 }

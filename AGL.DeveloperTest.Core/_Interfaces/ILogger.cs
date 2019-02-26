@@ -2,7 +2,7 @@
 
 namespace AGL.DeveloperTest.Core
 {
-    public interface ILogger
+    public interface ILoggerAGL
     {
         void Log(LoggingEventType entry, string message);
     }

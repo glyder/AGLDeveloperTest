@@ -57,28 +57,5 @@ namespace IntegrationTests
             Assert.Contains("pets", responseText);
         }
 
-
-        [Theory]
-        [InlineData(GOOGLEURL, "<!doctype html>", "doctype")]
-        [InlineData(AGLWEBURL, "[{\"name\":\"Bob\",\"gender\":\"Male\",", "gender")]
-        [Trait("Category", "IntegrationLive")]
-        public async void GetWebContent_FromUrlMocked_True(string url,
-                                                           string expectedStartsWith,
-                                                           string expectedContains)
-        {
-            // Arrange
-            string responseText = "";
-            IHttpClient client = new HttpHelper();
-          
-
-            // Act 
-            responseText = await client.Get(url);
-
-            // Assert
-            Assert.NotEmpty(responseText);
-            Assert.StartsWith(expectedStartsWith, responseText);
-            Assert.Contains(expectedContains, responseText);
-        }
-
     }
 }

@@ -4,7 +4,7 @@ using AGL.DeveloperTest.Models;
 
 namespace AGL.DeveloperTest.Core
 {
-    public class Logger : ILogger
+    public class LoggerAGL : ILoggerAGL
     {
         public void Log(LoggingEventType entry, string message)
         {

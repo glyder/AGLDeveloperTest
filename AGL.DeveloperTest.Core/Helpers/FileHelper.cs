@@ -18,7 +18,7 @@ namespace AGL.DeveloperTest.Core
             }
             catch (Exception ex)
             {
-                new Logger().Log(Models.LoggingEventType.Error, ex.Message);
+                new LoggerAGL().Log(Models.LoggingEventType.Error, ex.Message);
                 throw ex;
             }
         }

@@ -14,14 +14,14 @@ namespace AGL.DeveloperTest.Business
     /// All of the knowledge of persistence, including mapping from tables to objects, is safely contained in the repository.
     /// So logical choice of pattern to use here.
     /// </summary>
-    public class OwnerRepository : IOwnerRepository<Owner>
+    public class OwnerRepository<T> : IOwnerRepository<T>
     {
         #region Properties
         // private readonly ILogger _logger;
 
         private IURLHelper _urlHelper;
         private IHttpClient _httpClient;
-        private IDeserializer<Owner> _deserializer;
+        private IDeserializer<T> _deserializer;
 
         private string _endpoint = @"people.json";
         #endregion
@@ -35,12 +35,12 @@ namespace AGL.DeveloperTest.Business
         {
             _urlHelper = new URLHelper(@"http://agl-developer-test.azurewebsites.net");
             _httpClient = new HttpHelper();
-            _deserializer = new DeserializerJson<Owner>();
+            _deserializer = new DeserializerJson<T>();
         }
 
         public OwnerRepository(IURLHelper urlHelper,
                                IHttpClient httpClient,
-                               IDeserializer<Owner> deserializer)
+                               IDeserializer<T> deserializer)
         {
             _urlHelper = urlHelper;
             _httpClient = httpClient;
@@ -53,7 +53,7 @@ namespace AGL.DeveloperTest.Business
         /// Retrieve a list of Owners along with their Pets.
         /// </summary>
         /// <returns>IList<Owner></returns>
-        public async Task<IList<Owner>> GetAll()
+        public async Task<IList<T>> GetAll()
         {
             try
             {
@@ -64,31 +64,32 @@ namespace AGL.DeveloperTest.Business
                 string text = await _httpClient.Get(httpUrl);
 
                 // 3. Deserialize text JSON into Owners list
-                IList<Owner> owners = _deserializer.DeserializeText(text);
+                IList<T> owners = _deserializer.DeserializeText(text);
 
                 return owners;
             }
             catch (Exception ex)
             {
-                new Logger().Log(LoggingEventType.Error, ex.Message);
+                new LoggerAGL().Log(LoggingEventType.Error, ex.Message);
                 throw ex;
             }
         }
 
-        public async Task<IList<Owner>> GetByGender(string gender)
+        public async Task<IList<T>> GetByGender(string gender)
         {
             try
             {
-                IList<Owner> listOwnerByGender = await GetAll();
+                IList<T> listOwnerByGender = await GetAll();
 
-                IList<Owner> ListOwnerByGenderFiltered = listOwnerByGender.Where(x => x.Gender == gender)
-                                                                          .ToList();
+                IList<T> ListOwnerByGenderFiltered =
+                    listOwnerByGender.Where(x => x.GetType().GetProperty("Gender").GetValue(x, null) == gender)
+                                     .ToList();
 
                 return ListOwnerByGenderFiltered;
             }
             catch (Exception ex)
             {
-                new Logger().Log(LoggingEventType.Error, ex.Message);
+                new LoggerAGL().Log(LoggingEventType.Error, ex.Message);
                 throw ex;
             }
         }

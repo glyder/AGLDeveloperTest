@@ -2,27 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using AGL.DeveloperTest.Models;
 
 namespace AGL.DeveloperTest.Business
 {
-    public interface IConsoleFormatterOwner
-    {
-        void DisplayAllByGender(IList<IGrouping<string, Owner>> listOwnerGrouping);
-
-        void DisplayAllByGenderPets(IList<IGrouping<string, Owner>> listOwnerGrouping, string petType = "cat");
-
-        void DisplayKeyHeading(string key);
-    }
-
     /// <summary>
     /// 
     /// </summary>
     public class ConsoleFormatterOwner : IConsoleFormatterOwner
     {
-        const string BULLETPOINT = "\u2022";
-
-
         public ConsoleFormatterOwner()
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
@@ -39,7 +28,7 @@ namespace AGL.DeveloperTest.Business
 
                 foreach (var owner in listOwnerGroup)
                 {
-                    Console.WriteLine($"\u2022 {owner.Name}");
+                    Console.WriteLine($"{AGLConstants.BULLETPOINT} {owner.Name}");
                 }
 
                 Console.WriteLine();
@@ -61,7 +50,7 @@ namespace AGL.DeveloperTest.Business
                 //foreach (var owner in listOwnerGroup) { Console.WriteLine($"\u2022 {owner.Name}");
                     foreach (var pet in linqSorterOwner.SortGroupByPetType(group))
                     {
-                        Console.WriteLine($"  {BULLETPOINT} {pet.Name}");
+                        Console.WriteLine($"  {AGLConstants.BULLETPOINT} {pet.Name}");
                     }
                 //}
 

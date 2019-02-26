@@ -1,4 +1,5 @@
 ﻿
+https://pioneercode.com/post/dependency-injection-logging-and-configuration-in-a-dot-net-core-console-app
 
             // https://garywoodfine.com/configuration-api-net-core-console-application/
 

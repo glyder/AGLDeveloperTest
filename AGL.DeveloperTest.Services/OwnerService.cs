@@ -43,9 +43,9 @@ namespace AGL.DeveloperTest.Services
             _httpClient = new HttpHelper();
             _deserializerOwner = new DeserializerJson<Owner>();
 
-            _repositoryOwner = new OwnerRepository(_urlHelper,
-                                                   _httpClient,
-                                                   _deserializerOwner);
+            _repositoryOwner = new OwnerRepository<Owner>(_urlHelper,
+                                                           _httpClient,
+                                                           _deserializerOwner);
             _sortOwner = new LinqSorterOwner();
         }
 
@@ -59,9 +59,9 @@ namespace AGL.DeveloperTest.Services
             _httpClient = httpClient;
             _deserializerOwner = deserializer;
 
-            _repositoryOwner = new OwnerRepository(_urlHelper,
-                                                   _httpClient,
-                                                   _deserializerOwner);
+            _repositoryOwner = new OwnerRepository<Owner>(_urlHelper,
+                                                           _httpClient,
+                                                           _deserializerOwner);
 
             _sortOwner = linqSorter;
         }
@@ -90,7 +90,7 @@ namespace AGL.DeveloperTest.Services
             }
             catch (Exception ex)
             {
-                new Logger().Log(LoggingEventType.Error, ex.Message);
+                new LoggerAGL().Log(LoggingEventType.Error, ex.Message);
                 throw ex;
             }
         }
@@ -107,7 +107,6 @@ namespace AGL.DeveloperTest.Services
 
                     IList<IGrouping<string, Owner>> sortedListOwnerByGender = _sortOwner.SortGroupByGender(_listOwnerByGender);
 
-
                     _listOwnerByGender = sortedListOwnerByGender[0].GroupBy(x => x.Gender)
                                                                    .SelectMany(y => y.Select(x => x))
                                                                    .ToList();
@@ -122,7 +121,7 @@ namespace AGL.DeveloperTest.Services
             }
             catch (Exception ex)
             {
-                new Logger().Log(LoggingEventType.Error, ex.Message);
+                new LoggerAGL().Log(LoggingEventType.Error, ex.Message);
                 throw ex;
             }
         }

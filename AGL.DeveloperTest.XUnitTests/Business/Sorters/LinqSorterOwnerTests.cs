@@ -19,7 +19,7 @@ namespace CoreTests
         IHttpClient _httpClient = null;
         Mock<IDeserializer<Owner>> _deserializer = null;
 
-        OwnerRepository _ownerRepository = null;
+        OwnerRepository<Owner> _ownerRepository = null;
 
         public LinqSorterOwnerTests()
         {
@@ -31,9 +31,9 @@ namespace CoreTests
             _urlHelper = base.MoqURLHelper();
             _httpClient = await base.MockHttpClient();
             _deserializer = base.MoqDeserializerOwner();
-            _ownerRepository = new OwnerRepository(_urlHelper.Object,
-                                                   _httpClient,
-                                                   _deserializer.Object);
+            _ownerRepository = new OwnerRepository<Owner>(_urlHelper.Object,
+                                                           _httpClient,
+                                                           _deserializer.Object);
         }
 
         public override void Dispose()

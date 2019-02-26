@@ -37,9 +37,9 @@ namespace BusinessTests
             IHttpClient _httpClient = await base.MockHttpClient();
             Mock<IDeserializer<Owner>> _deserializer = base.MoqDeserializerOwner();
 
-            OwnerRepository op = new OwnerRepository(_urlHelper.Object,
-                                                     _httpClient,
-                                                     _deserializer.Object);
+            OwnerRepository<Owner> op = new OwnerRepository<Owner>(_urlHelper.Object,
+                                                                   _httpClient,
+                                                                   _deserializer.Object);
 
             // Act
             IList<Owner> list = await op.GetAll();
@@ -70,9 +70,9 @@ namespace BusinessTests
             IHttpClient _httpClient = null;
             IDeserializer<Owner> _deserializer = null;
 
-            OwnerRepository op = new OwnerRepository(_urlHelper,
-                                                     _httpClient,
-                                                     _deserializer);
+            OwnerRepository<Owner> op = new OwnerRepository<Owner>(_urlHelper,
+                                                                   _httpClient,
+                                                                   _deserializer);
 
             await Assert.ThrowsAsync<NullReferenceException>(() => op.GetAll());
         }
