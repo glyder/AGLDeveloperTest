@@ -4,6 +4,8 @@ using AGL.DeveloperTest.Core;
 using AGL.DeveloperTest.Business;
 using AGL.DeveloperTest.Services;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Hosting;
+using System;
 
 namespace AGL.DeveloperTest.ConsoleTester.Config
 {
@@ -13,29 +15,50 @@ namespace AGL.DeveloperTest.ConsoleTester.Config
         {
             #region "Add services"
 
-            // Other
-
-            // Models
-
             // Core
-            serviceCollection.AddTransient(typeof(IDeserializer<>), typeof(DeserializerJson<>));
-            serviceCollection.AddTransient<IFileReader, FileHelper>();
-            serviceCollection.AddTransient<IHttpClient, HttpHelper>();
-            serviceCollection.AddTransient<IURLHelper, URLHelper>();
-            serviceCollection.AddTransient<ILoggerAGL, LoggerAGL>();
+            serviceCollection
+                .AddTransient(typeof(IDeserializer<>), typeof(DeserializerJson<>))
+                .AddTransient<IFileReader, FileHelper>()
+                .AddTransient<IHttpClient, HttpHelper>()
+                .AddTransient<IURLHelper, URLHelper>()
+                .AddTransient<ILoggerAGL, LoggerAGL>();
 
             // Business
-            serviceCollection.AddTransient<ILinqSorterOwner, LinqSorterOwner>();
-            serviceCollection.AddTransient(typeof(IOwnerRepository<>), typeof(OwnerRepository<>));
-            serviceCollection.AddTransient<IConsoleFormatterOwner, ConsoleFormatterOwner>();
+            serviceCollection
+                .AddTransient<ILinqSorterOwner, LinqSorterOwner>()
+                .AddTransient(typeof(IOwnerRepository<>), typeof(OwnerRepository<>))
+                .AddTransient<IConsoleFormatterOwner, ConsoleFormatterOwner>();
 
             // Services
-            serviceCollection.AddTransient<IOwnerService, OwnerService>();
-            serviceCollection.AddTransient<ITestService, TestService>();
+            serviceCollection
+                .AddTransient<IOwnerService, OwnerService>()
+                .AddTransient<ITestService, TestService>();
 
             // add app
-            serviceCollection.AddTransient<AppTest>();
-            serviceCollection.AddTransient<App>();
+            serviceCollection
+                .AddTransient<AppTest>()
+                .AddTransient<App>();
+
+            // add logging
+            serviceCollection.AddLogging(config => {
+
+                // clear out default configuration
+                config.ClearProviders();
+
+                //config.AddConfiguration(Configuration.GetSection("Logging"));
+                //config.AddDebug();
+                //config.AddEventSourceLogger();
+
+                if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == EnvironmentName.Development)
+                {
+                    config.AddConsole();
+                }
+
+                // config.AddConsole();
+                config.AddDebug();
+            });
+
+            // Other
 
             #endregion
         }

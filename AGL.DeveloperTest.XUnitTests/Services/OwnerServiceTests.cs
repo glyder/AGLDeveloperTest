@@ -11,6 +11,7 @@ using AGL.DeveloperTest.Business;
 using AGL.DeveloperTest.Services;
 using System;
 using System.Linq;
+using Microsoft.Extensions.Logging;
 
 namespace ServicesTests
 {
@@ -18,6 +19,7 @@ namespace ServicesTests
     {
         #region Properties
 
+        Mock<ILogger<OwnerService>> _logger;
         Mock<IURLHelper> _urlHelper;
         IHttpClient _httpClient;
         Mock<IDeserializer<Owner>> _deserializer;
@@ -36,6 +38,7 @@ namespace ServicesTests
 
         async Task OwnerServiceTestsAsync()
         {
+            _logger = new Mock<ILogger<OwnerService>>();
             _urlHelper = base.MoqURLHelper();
             _httpClient = await base.MockHttpClient();
             _deserializer = base.MoqDeserializerOwner();
@@ -66,7 +69,8 @@ namespace ServicesTests
             // Arrange
             // See Constructor/Setup above
 
-            IOwnerService ownerService = new OwnerService(_urlHelper.Object,
+            IOwnerService ownerService = new OwnerService(_logger.Object,
+                                                           _urlHelper.Object,
                                                           _httpClient,
                                                           _deserializer.Object,
                                                           _repositoryOwner,
@@ -89,82 +93,85 @@ namespace ServicesTests
 
         }
 
-        //[Fact(Skip = "Need to fix LInQ query")]
-        //[Trait("Category", "Services")]
-        //public async Task OwnerService_RetrieveMaleList_True()
-        //{
-        //    // Arrange
-        //    // See Constructor/Setup above
+        [Fact] // (Skip = "Need to fix LInQ query")]
+        [Trait("Category", "Services")]
+        public async Task OwnerService_RetrieveMaleList_True()
+        {
+            // Arrange
+            // See Constructor/Setup above
 
-        //    IOwnerService ownerService = new OwnerService(_urlHelper.Object,
-        //                                                  _httpClient,
-        //                                                  _deserializer.Object,
-        //                                                  _repositoryOwner,
-        //                                                  _sortOwner);
+            IOwnerService ownerService = new OwnerService(_logger.Object,
+                                                          _urlHelper.Object,
+                                                          _httpClient,
+                                                          _deserializer.Object,
+                                                          _repositoryOwner,
+                                                          _sortOwner);
 
-        //    // Act
-        //    IList<Owner> list = await ownerService.GetByGender("Male", true);
+            // Act
+            IList<Owner> list = await ownerService.GetByGender("Male", true);
 
-        //    // Assert
-        //    Assert.NotNull(list);
-        //    Assert.True(list.Count > 0);
-        //    Assert.NotNull(list[0]);
+            // Assert
+            Assert.NotNull(list);
+            Assert.True(list.Count > 0);
+            Assert.NotNull(list[0]);
 
-        //    Assert.Equal("Male", list[0].Gender);
-        //    Assert.Equal("Male", list[1].Gender);
+            Assert.Equal("Male", list[0].Gender);
+            Assert.Equal("Male", list[1].Gender);
 
-        //    Assert.Equal("Bob", list[0].Name);
-        //}
+            Assert.Equal("Bob", list[0].Name);
+        }
 
-        //[Fact(Skip = "Need to fix LInQ query")]
-        //[Trait("Category", "Services")]
-        //public async Task OwnerService_RetrieveMaleListSorted_True()
-        //{
-        //    // Arrange
-        //    // See Constructor/Setup above
+        [Fact]
+        [Trait("Category", "Services")]
+        public async Task OwnerService_RetrieveMaleListSorted_True()
+        {
+            // Arrange
+            // See Constructor/Setup above
 
-        //    IOwnerService ownerService = new OwnerService(_urlHelper.Object,
-        //                                                  _httpClient,
-        //                                                  _deserializer.Object,
-        //                                                  _repositoryOwner,
-        //                                                  _sortOwner);
-
-
-        //    // Act
-        //    IList<Owner> list = await ownerService.GetByGender("Female", true);
-
-        //    // Assert
-        //    Assert.NotNull(list);
-        //    Assert.True(list.Count > 0);
-        //    Assert.NotNull(list[0]);
-
-        //    Assert.Equal("Female", list[0].Gender);
-        //    Assert.Equal("Female", list[2].Gender);
-
-        //    Assert.Equal("Alice", list[0].Name);
-        //}
+            IOwnerService ownerService = new OwnerService(_logger.Object,
+                                                          _urlHelper.Object,
+                                                          _httpClient,
+                                                          _deserializer.Object,
+                                                          _repositoryOwner,
+                                                          _sortOwner);
 
 
-        //[Fact(Skip = "Need to fix LInQ query")]
-        //[Trait("Category", "Services")]
-        //public async Task OwnerService_RetrieveUknownGenderIsNull_True()
-        //{
-        //    // Arrange
-        //    // See Constructor/Setup above
+            // Act
+            IList<Owner> list = await ownerService.GetByGender("Female", true);
 
-        //    IOwnerService ownerService = new OwnerService(_urlHelper.Object,
-        //                                                  _httpClient,
-        //                                                  _deserializer.Object,
-        //                                                  _repositoryOwner,
-        //                                                  _sortOwner);
+            // Assert
+            Assert.NotNull(list);
+            Assert.True(list.Count > 0);
+            Assert.NotNull(list[0]);
 
-        //    // Act
-        //    IList<Owner> list = await ownerService.GetByGender("Unknown", true);
+            Assert.Equal("Female", list[0].Gender);
+            Assert.Equal("Female", list[2].Gender);
 
-        //    // Assert
-        //    Assert.NotNull(list);
-        //    Assert.True(list.Count == 0);
-        //}
+            Assert.Equal("Alice", list[0].Name);
+        }
+
+
+        [Fact]
+        [Trait("Category", "Services")]
+        public async Task OwnerService_RetrieveUknownGenderIsNull_True()
+        {
+            // Arrange
+            // See Constructor/Setup above
+
+            IOwnerService ownerService = new OwnerService(_logger.Object,
+                                                          _urlHelper.Object,
+                                                          _httpClient,
+                                                          _deserializer.Object,
+                                                          _repositoryOwner,
+                                                          _sortOwner);
+
+            // Act
+            IList<Owner> list = await ownerService.GetByGender("Unknown", true);
+
+            // Assert
+            Assert.NotNull(list);
+            Assert.True(list.Count == 0);
+        }
 
     }
 }

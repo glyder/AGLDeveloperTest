@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace AGL.DeveloperTest.Business
@@ -10,7 +11,7 @@ namespace AGL.DeveloperTest.Business
     public interface IOwnerRepository<T>
     {
         Task<IList<T>> GetAll();
-        Task<IList<T>> GetByGender(string gender);
+        Task<IList<T>> GetByGender(Func<T, bool> whereClause);
     }
 
 }

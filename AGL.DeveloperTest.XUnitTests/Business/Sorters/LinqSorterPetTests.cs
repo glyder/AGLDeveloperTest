@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 
 using Moq;
 using Xunit;
@@ -12,10 +11,14 @@ using AGL.DeveloperTest.Core;
 using AGL.DeveloperTest.Business;
 using AGL.DeveloperTest.Services;
 
+
 namespace BusinessTests
 {
     public class LinqSorterPetTests : BaseTests, IDisposable
     {
+        // Mock<ILogger<OwnerService>> _loggerMock = new Mock<ILogger<OwnerService>>();
+        Mock<AbstractLogger<OwnerService>> _loggerMock = new Mock<AbstractLogger<OwnerService>>(); 
+        
         Mock<IURLHelper> _urlHelper;
         IHttpClient _httpClient;
         Mock<IDeserializer<Owner>> _deserializer;
@@ -62,7 +65,8 @@ namespace BusinessTests
             // Arrange
             // See Constructor/Setup above
 
-            IOwnerService ownerService = new OwnerService(_urlHelper.Object,
+            IOwnerService ownerService = new OwnerService(_loggerMock.Object,
+                                                          _urlHelper.Object,
                                                           _httpClient,
                                                           _deserializer.Object,
                                                           _repositoryOwner,
@@ -87,7 +91,8 @@ namespace BusinessTests
             // Arrange
             // See Constructor/Setup above
 
-            IOwnerService ownerService = new OwnerService(_urlHelper.Object,
+            IOwnerService ownerService = new OwnerService(_loggerMock.Object,
+                                                          _urlHelper.Object,
                                                           _httpClient,
                                                           _deserializer.Object,
                                                           _repositoryOwner,
@@ -111,7 +116,8 @@ namespace BusinessTests
             // Arrange
             // See Constructor/Setup above
 
-            IOwnerService ownerService = new OwnerService(_urlHelper.Object,
+            IOwnerService ownerService = new OwnerService(_loggerMock.Object,
+                                                          _urlHelper.Object,
                                                           _httpClient,
                                                           _deserializer.Object,
                                                           _repositoryOwner,
@@ -143,7 +149,8 @@ namespace BusinessTests
             // Arrange
             // See Constructor/Setup above
 
-            IOwnerService ownerService = new OwnerService(_urlHelper.Object,
+            IOwnerService ownerService = new OwnerService(_loggerMock.Object,
+                                                          _urlHelper.Object,
                                                           _httpClient,
                                                           _deserializer.Object,
                                                           _repositoryOwner,

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 using AGL.DeveloperTest.Core;
@@ -75,15 +76,14 @@ namespace AGL.DeveloperTest.Business
             }
         }
 
-        public async Task<IList<T>> GetByGender(string gender)
+        public async Task<IList<T>> GetByGender(Func<T, bool> whereClause)
         {
             try
             {
                 IList<T> listOwnerByGender = await GetAll();
 
-                IList<T> ListOwnerByGenderFiltered =
-                    listOwnerByGender.Where(x => x.GetType().GetProperty("Gender").GetValue(x, null) == gender)
-                                     .ToList();
+                IList<T> ListOwnerByGenderFiltered = listOwnerByGender.Where(whereClause)
+                                                                      .ToList();
 
                 return ListOwnerByGenderFiltered;
             }

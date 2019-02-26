@@ -33,3 +33,15 @@ RichardSzalay.MockHttp(5.0.0)
           .ToList();
 
             #endregion
+
+
+
+
+In order to conifguration code, you need to add these packages:
+
+<PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.0" />
+<PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="2.1.0" />
+<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="2.1.0" />
+<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.0" />
+<PackageReference Include="Microsoft.Extensions.Hosting" Version="2.1.0" />
+

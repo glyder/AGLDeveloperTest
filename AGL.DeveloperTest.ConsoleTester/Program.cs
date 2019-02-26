@@ -7,13 +7,18 @@ using AGL.DeveloperTest.ConsoleTester.Config;
 using AGL.DeveloperTest.Business;
 using AGL.DeveloperTest.Services;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace AGL.DeveloperTest.ConsoleTester
 {
     /// <summary>
     /// </summary>
-    class Program
+    public class Program
     {
+
+        public static ILoggerFactory LoggerFactory;
+        public static IConfigurationRoot Configuration;
+
         static void Main(string[] args)
         {
             // create service collection
@@ -23,9 +28,8 @@ namespace AGL.DeveloperTest.ConsoleTester
             // create service provider
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
-            // entry to run app
-            serviceProvider.GetService<AppTest>().Run();
 
+            // Need to call an async method specifically as HTTP client is async
             MainAsync(args, serviceProvider).GetAwaiter().GetResult();
 
             Console.ReadLine();
@@ -37,12 +41,11 @@ namespace AGL.DeveloperTest.ConsoleTester
 
             #region "Config / appSettings"
 
-            string urlPeopleJSON = "";
-            IConfigurationRoot config = ConfigHelper.ConfigBuild();
-            urlPeopleJSON = ConfigHelper.GetURLByEndpoint(config, "people");
 
             #endregion
 
+            // entry to run app
+            // serviceProvider.GetService<AppTest>().Run();
             await serviceProvider.GetService<App>().Run();
         }
 
