@@ -13,12 +13,6 @@ using AGL.DeveloperTest.Business;
 
 namespace AGL.DeveloperTest.Services
 {
-    public interface IOwnerService
-    {
-        Task<IList<IGrouping<string, Owner>>> GetAll();
-        Task<IList<Owner>> GetByGender(string gender, bool sortByName = false);
-    }
-
     public class OwnerService : IOwnerService
     {
         #region Properties
@@ -44,10 +38,10 @@ namespace AGL.DeveloperTest.Services
         /// </summary>
         public OwnerService()
         {
+            _logger = new Logger<OwnerService>(new LoggerFactory());
             _urlHelper = new URLHelper(@"http://agl-developer-test.azurewebsites.net");
-            _httpClient = new HttpHelper();
+            _httpClient = new HttpClientHelper();
             _deserializerOwner = new DeserializerJson<Owner>();
-
             _repositoryOwner = new OwnerRepository<Owner>(_urlHelper,
                                                            _httpClient,
                                                            _deserializerOwner);
@@ -62,15 +56,12 @@ namespace AGL.DeveloperTest.Services
                             ILinqSorterOwner linqSorter)
         {
             _logger = logger;
-
             _urlHelper = urlHelper;
             _httpClient = httpClient;
             _deserializerOwner = deserializer;
-
             _repositoryOwner = new OwnerRepository<Owner>(_urlHelper,
                                                            _httpClient,
                                                            _deserializerOwner);
-
             _sortOwner = linqSorter;
         }
 
@@ -85,7 +76,7 @@ namespace AGL.DeveloperTest.Services
                 if (_listOwnerByGender.Any())
                 {
 
-                    IList<IGrouping<string, Owner>> sortedListOwnerByGender = _sortOwner.SortGroupByGender(_listOwnerByGender);
+                    IList<IGrouping<string, Owner>> sortedListOwnerByGender = _sortOwner.SortGroupByGender(_listOwnerByGender).ToList();
 
 
                     return sortedListOwnerByGender;
@@ -114,7 +105,7 @@ namespace AGL.DeveloperTest.Services
                 if (sortByName && 
                     _listOwnerByGender.Any()) {
 
-                    IList<IGrouping<string, Owner>> sortedListOwnerByGender = _sortOwner.SortGroupByGender(_listOwnerByGender);
+                    IList<IGrouping<string, Owner>> sortedListOwnerByGender = _sortOwner.SortGroupByGender(_listOwnerByGender).ToList();
 
                     _listOwnerByGender = sortedListOwnerByGender[0].GroupBy(x => x.Gender)
                                                                    .SelectMany(y => y.Select(x => x))

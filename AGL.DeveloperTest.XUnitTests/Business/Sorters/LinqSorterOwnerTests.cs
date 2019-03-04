@@ -16,7 +16,7 @@ namespace CoreTests
     public class LinqSorterOwnerTests : BaseTests, IDisposable
     {
         Mock<IURLHelper> _urlHelper = null;
-        IHttpClient _httpClient = null;
+        IHttpClient _httpClientMock = null;
         Mock<IDeserializer<Owner>> _deserializer = null;
 
         OwnerRepository<Owner> _ownerRepository = null;
@@ -29,10 +29,10 @@ namespace CoreTests
         async Task LinqSorterOwnerTestsAsync()
         {
             _urlHelper = base.MoqURLHelper();
-            _httpClient = await base.MockHttpClient();
+            _httpClientMock = await base.MockHttpClient();
             _deserializer = base.MoqDeserializerOwner();
             _ownerRepository = new OwnerRepository<Owner>(_urlHelper.Object,
-                                                           _httpClient,
+                                                           _httpClientMock,
                                                            _deserializer.Object);
         }
 
@@ -49,11 +49,11 @@ namespace CoreTests
             // Arrange
             // See Constructor/Setup above
 
-            IList<Owner> listOwner = await _ownerRepository.GetAll();
+            IEnumerable<Owner> listOwner = await _ownerRepository.GetAll();
             ILinqSorterOwner linqSorter = new LinqSorterOwner();
 
             // Act
-            var listSorted = linqSorter.SortGroupByGender(listOwner);
+            var listSorted = linqSorter.SortGroupByGender(listOwner).ToList();
 
             // Assert
             Assert.Equal(2, listSorted.Count);
@@ -73,7 +73,7 @@ namespace CoreTests
             ILinqSorterOwner linqSorter = new LinqSorterOwner();
 
             // Act
-            var listSorted = linqSorter.SortGroupByGender(listOwner);
+            var listSorted = linqSorter.SortGroupByGender(listOwner).ToList();
 
             // Assert
             var female = listSorted[0];
@@ -92,7 +92,7 @@ namespace CoreTests
             ILinqSorterOwner linqSorter = new LinqSorterOwner();
 
             // Act
-            var listSorted = linqSorter.SortGroupByGender(listOwner);
+            var listSorted = linqSorter.SortGroupByGender(listOwner).ToList();
 
             // Assert
             var female = listSorted[0];
@@ -116,7 +116,7 @@ namespace CoreTests
             ILinqSorterOwner linqSorter = new LinqSorterOwner();
 
             // Act
-            var listSorted = linqSorter.SortGroupByGender(listOwner);
+            var listSorted = linqSorter.SortGroupByGender(listOwner).ToList();
 
             // Assert
             var male = listSorted[1];

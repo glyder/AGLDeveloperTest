@@ -4,7 +4,6 @@ using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-using Microsoft.Extensions.Logging;
 using Moq;
 
 using AGL.DeveloperTest.Core;
@@ -17,10 +16,10 @@ namespace AGL.Base
     {
         #region "Properties"
 
-        public readonly string PEOPLE_FILE_JSON = Directory.GetCurrentDirectory() +
+        public readonly string PEOPLE_FILE_JSON = Directory.GetCurrentDirectory() + 
                                                   @"\_Data\people.json";
 
-        public readonly bool runLiveTests = true;
+        public readonly bool stopIntegrationLiveTests = false;
 
         #endregion
 
@@ -38,14 +37,14 @@ namespace AGL.Base
 
         #endregion
 
-        #region "Helpers"
+        #region "Helpers - readJSONFile, listOnwerFromJSON, listOwnerFromFile"
 
         /// <summary>
         /// For MOQ use, read all JSON text from file
         /// </summary>
         /// <param name="path">path of file to read</param>
         /// <returns>string text of file</returns>
-        protected virtual string helperGetSONFromFile(string path)
+        protected virtual string helperGetJSONFromFile(string path)
         {
             return File.ReadAllText(path);
         }
@@ -71,14 +70,14 @@ namespace AGL.Base
         /// <returns>IList Owner</returns>
         protected virtual IList<Owner> helperGetListOwnerFromFile(string path)
         {
-            string jsonText = this.helperGetSONFromFile(path);
+            string jsonText = this.helperGetJSONFromFile(path);
 
             return this.helperGetListOwnerFromJson(jsonText);
         }
 
         #endregion
 
-        #region "MOQs"
+        #region "MOQs - IURLHelper, IDeserializer"
 
         protected virtual Mock<IURLHelper> MoqURLHelper()
         {
@@ -103,27 +102,33 @@ namespace AGL.Base
             return _deserializerOwner;
         }
 
-        protected virtual async Task<IHttpClient> MockHttpClient()
+        #endregion
+
+        #region "Mock - HttpClient"
+
+        // Mock HttpClient - fixed JSON file with this one.
+        protected virtual async Task<IHttpClient> MockHttpClient(string testFile = "")
         {
-            var httpClient = new HttpClient(new MockHttpMessageHandler(MockHttpMessageHandlerObjectType.FilePath, 
-                                                                       PEOPLE_FILE_JSON));
-            IHttpClient httpHelper = new HttpHelper(httpClient);
+            testFile = string.IsNullOrEmpty(testFile) ? PEOPLE_FILE_JSON : testFile;
+
+            var httpClient = new HttpClient(new MockHttpMessageHandler(MockHttpMessageHandlerObjectType.FilePath,
+                                                                       testFile));
+            IHttpClient httpHelper = new HttpClientHelper(httpClient);
             var content = await httpClient.GetStringAsync("http://some.fake.url");
 
             return httpHelper;
         }
 
+        // Mock HTTPClient overriding file or string types with this all purpose one.
         protected virtual async Task<IHttpClient> MockHttpClient(MockHttpMessageHandlerObjectType type,
                                                                  string objectType)
         {
             var httpClient = new HttpClient(new MockHttpMessageHandler(type, objectType));
-            IHttpClient httpHelper = new HttpHelper(httpClient);
+            IHttpClient httpHelper = new HttpClientHelper(httpClient);
             var content = await httpClient.GetStringAsync("http://some.fake.url");
 
             return httpHelper;
         }
-
-
 
         #endregion
 

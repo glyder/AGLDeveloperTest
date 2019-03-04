@@ -19,9 +19,9 @@ namespace ServicesTests
     {
         #region Properties
 
-        Mock<ILogger<OwnerService>> _logger;
+        Mock<ILogger<OwnerService>> _loggerMock;
         Mock<IURLHelper> _urlHelper;
-        IHttpClient _httpClient;
+        IHttpClient _httpClientMock;
         Mock<IDeserializer<Owner>> _deserializer;
         ILinqSorterOwner _sortOwner;
 
@@ -38,14 +38,14 @@ namespace ServicesTests
 
         async Task OwnerServiceTestsAsync()
         {
-            _logger = new Mock<ILogger<OwnerService>>();
+            _loggerMock = new Mock<ILogger<OwnerService>>();
             _urlHelper = base.MoqURLHelper();
-            _httpClient = await base.MockHttpClient();
+            _httpClientMock = await base.MockHttpClient();
             _deserializer = base.MoqDeserializerOwner();
             _sortOwner = new LinqSorterOwner();
 
             _repositoryOwner = new OwnerRepository<Owner>(_urlHelper.Object,
-                                                           _httpClient,
+                                                           _httpClientMock,
                                                            _deserializer.Object);
         }
 
@@ -54,7 +54,7 @@ namespace ServicesTests
             base.Dispose();
 
             _urlHelper = null;
-            _httpClient = null;
+            _httpClientMock = null;
             _deserializer = null;
             _sortOwner = null;
             _repositoryOwner = null;
@@ -69,9 +69,9 @@ namespace ServicesTests
             // Arrange
             // See Constructor/Setup above
 
-            IOwnerService ownerService = new OwnerService(_logger.Object,
+            IOwnerService ownerService = new OwnerService(_loggerMock.Object,
                                                            _urlHelper.Object,
-                                                          _httpClient,
+                                                          _httpClientMock,
                                                           _deserializer.Object,
                                                           _repositoryOwner,
                                                           _sortOwner);
@@ -100,9 +100,9 @@ namespace ServicesTests
             // Arrange
             // See Constructor/Setup above
 
-            IOwnerService ownerService = new OwnerService(_logger.Object,
+            IOwnerService ownerService = new OwnerService(_loggerMock.Object,
                                                           _urlHelper.Object,
-                                                          _httpClient,
+                                                          _httpClientMock,
                                                           _deserializer.Object,
                                                           _repositoryOwner,
                                                           _sortOwner);
@@ -128,9 +128,9 @@ namespace ServicesTests
             // Arrange
             // See Constructor/Setup above
 
-            IOwnerService ownerService = new OwnerService(_logger.Object,
+            IOwnerService ownerService = new OwnerService(_loggerMock.Object,
                                                           _urlHelper.Object,
-                                                          _httpClient,
+                                                          _httpClientMock,
                                                           _deserializer.Object,
                                                           _repositoryOwner,
                                                           _sortOwner);
@@ -158,9 +158,9 @@ namespace ServicesTests
             // Arrange
             // See Constructor/Setup above
 
-            IOwnerService ownerService = new OwnerService(_logger.Object,
+            IOwnerService ownerService = new OwnerService(_loggerMock.Object,
                                                           _urlHelper.Object,
-                                                          _httpClient,
+                                                          _httpClientMock,
                                                           _deserializer.Object,
                                                           _repositoryOwner,
                                                           _sortOwner);

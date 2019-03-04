@@ -28,11 +28,11 @@ namespace CoreTests
         {
             // Arrange
             string responseText = "";
-            IHttpClient _httpClient = await base.MockHttpClient(MockHttpMessageHandlerObjectType.FilePath,
+            IHttpClient _httpClientMock = await base.MockHttpClient(MockHttpMessageHandlerObjectType.FilePath,
                                                                 base.PEOPLE_FILE_JSON);
 
             // Act 
-            responseText = await _httpClient.Get(url);
+            responseText = await _httpClientMock.Get(url);
 
             // Assert
             Assert.NotEmpty(responseText);
@@ -46,11 +46,11 @@ namespace CoreTests
         {
             // Arrange
             string responseText = "";
-            IHttpClient _httpClient = await base.MockHttpClient(MockHttpMessageHandlerObjectType.FilePath,
+            IHttpClient _httpClientMock = await base.MockHttpClient(MockHttpMessageHandlerObjectType.FilePath,
                                                                 base.PEOPLE_FILE_JSON);
 
             // Act 
-            responseText = await _httpClient.Get(AGLWEBURL);
+            responseText = await _httpClientMock.Get(AGLWEBURL);
 
             // Assert
             Assert.NotEmpty(responseText);
@@ -68,12 +68,12 @@ namespace CoreTests
         {
             // Arrange
             string responseText = "";
-            IHttpClient _httpClient = await base.MockHttpClient(MockHttpMessageHandlerObjectType.FilePath,
+            IHttpClient _httpClientMock = await base.MockHttpClient(MockHttpMessageHandlerObjectType.FilePath,
                                                                 base.PEOPLE_FILE_JSON);
 
 
             // Act 
-            responseText = await _httpClient.Get(url);
+            responseText = await _httpClientMock.Get(url);
 
             // Assert
             Assert.NotEmpty(responseText);

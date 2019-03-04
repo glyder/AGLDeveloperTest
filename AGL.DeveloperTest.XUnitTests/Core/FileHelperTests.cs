@@ -7,19 +7,15 @@ namespace CoreTests
 {
     public class FileHelperTests : BaseTests
     {
-
-
-
-
         [Fact]
         [Trait("Category", "TestHelper")]
-        public void JSONPeopleSampleData_CanBeRead_True()
+        public void baseTestJSONFile_CanBeRead_True()
         {
             // Arrange
             string fileText = "";
 
             // Act
-            fileText = base.helperGetSONFromFile(PEOPLE_FILE_JSON);
+            fileText = base.helperGetJSONFromFile(PEOPLE_FILE_JSON);
 
             // Assert
             Assert.NotEmpty(fileText);
@@ -29,7 +25,7 @@ namespace CoreTests
 
         [Fact]
         [Trait("Category", "Core")]
-        public void FileReader_CanBeRead_True()
+        public void IFileReader_CanBeRead_True()
         {
             // Arrange
             string fileText = "";

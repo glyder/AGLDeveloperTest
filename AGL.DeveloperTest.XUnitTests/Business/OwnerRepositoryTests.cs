@@ -34,11 +34,11 @@ namespace BusinessTests
 
             // Arrange
             Mock<IURLHelper> _urlHelper = base.MoqURLHelper();
-            IHttpClient _httpClient = await base.MockHttpClient();
+            IHttpClient _httpClientMock = await base.MockHttpClient();
             Mock<IDeserializer<Owner>> _deserializer = base.MoqDeserializerOwner();
 
             OwnerRepository<Owner> op = new OwnerRepository<Owner>(_urlHelper.Object,
-                                                                   _httpClient,
+                                                                   _httpClientMock,
                                                                    _deserializer.Object);
 
             // Act
@@ -67,11 +67,11 @@ namespace BusinessTests
 
             // Arrange
             IURLHelper _urlHelper = null;
-            IHttpClient _httpClient = null;
+            IHttpClient _httpClientMock = null;
             IDeserializer<Owner> _deserializer = null;
 
             OwnerRepository<Owner> op = new OwnerRepository<Owner>(_urlHelper,
-                                                                   _httpClient,
+                                                                   _httpClientMock,
                                                                    _deserializer);
 
             await Assert.ThrowsAsync<NullReferenceException>(() => op.GetAll());

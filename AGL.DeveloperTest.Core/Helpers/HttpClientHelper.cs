@@ -1,10 +1,9 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace AGL.DeveloperTest.Core
 {
-    public class HttpHelper : IHttpClient
+    public class HttpClientHelper : IHttpClient
     {
         #region "Properties"
 
@@ -12,7 +11,7 @@ namespace AGL.DeveloperTest.Core
 
         #endregion
 
-        public HttpHelper()
+        public HttpClientHelper()
         {
             if (HttpClient == null)
             {
@@ -24,7 +23,7 @@ namespace AGL.DeveloperTest.Core
         /// For Testing purpose inject MOQs here
         /// </summary>
         /// <param name="httpClient"></param>
-        public HttpHelper(HttpClient httpClient)
+        public HttpClientHelper(HttpClient httpClient)
         {
             HttpClient = httpClient;
         }

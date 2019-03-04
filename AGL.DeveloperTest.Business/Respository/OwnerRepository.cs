@@ -35,7 +35,7 @@ namespace AGL.DeveloperTest.Business
         public OwnerRepository()
         {
             _urlHelper = new URLHelper(@"http://agl-developer-test.azurewebsites.net");
-            _httpClient = new HttpHelper();
+            _httpClient = new HttpClientHelper();
             _deserializer = new DeserializerJson<T>();
         }
 

@@ -1,17 +1,18 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System;
+
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 
 using AGL.DeveloperTest.Core;
 using AGL.DeveloperTest.Business;
 using AGL.DeveloperTest.Services;
-using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Hosting;
-using System;
 
-namespace AGL.DeveloperTest.ConsoleTester.Config
+namespace AGL.DeveloperTest.ConsoleTester
 {
-    public static class ConfigServices
+    public static class ServiceCollectionHelper
     {
-        public static void ConfigureServices(IServiceCollection serviceCollection)
+        public static void ConfigureAddServices(IServiceCollection serviceCollection)
         {
             #region "Add services"
 
@@ -19,10 +20,10 @@ namespace AGL.DeveloperTest.ConsoleTester.Config
             serviceCollection
                 .AddTransient(typeof(IDeserializer<>), typeof(DeserializerJson<>))
                 .AddTransient<IFileReader, FileHelper>()
-                .AddTransient<IHttpClient, HttpHelper>()
+                .AddTransient<IHttpClient, HttpClientHelper>()
                 .AddTransient<IURLHelper, URLHelper>()
                 .AddTransient<ILoggerAGL, LoggerAGL>();
-
+                
             // Business
             serviceCollection
                 .AddTransient<ILinqSorterOwner, LinqSorterOwner>()
@@ -31,16 +32,23 @@ namespace AGL.DeveloperTest.ConsoleTester.Config
 
             // Services
             serviceCollection
-                .AddTransient<IOwnerService, OwnerService>()
-                .AddTransient<ITestService, TestService>();
+                .AddTransient<ITestService, TestService>()
+                .AddTransient<IOwnerService, OwnerService>();
 
-            // add app
+            // add main apps
             serviceCollection
                 .AddTransient<AppTest>()
                 .AddTransient<App>();
 
-            // add logging
-            serviceCollection.AddLogging(config => {
+            // Other
+
+            #endregion
+        }
+
+        public static void ConfigureAddLogging(IServiceCollection serviceCollection)
+        {
+            serviceCollection
+                .AddLogging(config => {
 
                 // clear out default configuration
                 config.ClearProviders();
@@ -58,9 +66,6 @@ namespace AGL.DeveloperTest.ConsoleTester.Config
                 config.AddDebug();
             });
 
-            // Other
-
-            #endregion
         }
 
     }

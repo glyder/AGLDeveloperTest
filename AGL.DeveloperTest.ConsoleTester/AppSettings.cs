@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace AGL.DeveloperTest.ConsoleTester
 {
-    public class MySettingsConfig
+    public class AppSettingsConfig
     {
         public string Author { get; set; }
 
@@ -13,11 +13,15 @@ namespace AGL.DeveloperTest.ConsoleTester
 
         public EndpointsConfig EndpointsConfig { get; set; }
 
-        public MySettingsConfig(string author,
+        public bool RunInternetTests { get; set; }
+
+        public AppSettingsConfig(string author,
                                 string baseUrl)
         {
             Author = author;
             BaseUrl = baseUrl;
+
+            EndpointsConfig = new EndpointsConfig();
         }
 
     }

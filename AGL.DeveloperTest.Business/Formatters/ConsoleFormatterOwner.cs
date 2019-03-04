@@ -7,9 +7,6 @@ using AGL.DeveloperTest.Models;
 
 namespace AGL.DeveloperTest.Business
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public class ConsoleFormatterOwner : IConsoleFormatterOwner
     {
         public ConsoleFormatterOwner()

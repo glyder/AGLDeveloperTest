@@ -14,7 +14,7 @@ namespace CoreTests
         public void Deserialize_StringToListOwners_True()
         {
             // Arrange
-            string fileText = base.helperGetSONFromFile(PEOPLE_FILE_JSON);
+            string fileText = base.helperGetJSONFromFile(PEOPLE_FILE_JSON);
             IDeserializer<Owner> serializer = new DeserializerJson<Owner>();
 
             // Act
@@ -30,7 +30,7 @@ namespace CoreTests
         public void DeserializerJson_PersonJSONParametersMappedCorrectly_True()
         {
             // Arrange
-            string fileText = base.helperGetSONFromFile(PEOPLE_FILE_JSON);
+            string fileText = base.helperGetJSONFromFile(PEOPLE_FILE_JSON);
             IDeserializer<Owner> serializer = new DeserializerJson<Owner>();
 
             // Act

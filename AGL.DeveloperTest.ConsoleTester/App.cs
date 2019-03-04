@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Threading.Tasks;
+
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Configuration;
 
 using AGL.DeveloperTest.Business;
 using AGL.DeveloperTest.Services;
-using Microsoft.Extensions.Configuration;
-using AGL.DeveloperTest.ConsoleTester.Config;
+using System.Linq;
 
 namespace AGL.DeveloperTest.ConsoleTester
 {
     public class App
     {
+        public static IConfigurationRoot _configurationRoot;
+
         private readonly ITestService _testService;
         private readonly ILogger<App> _logger;
 
@@ -31,11 +34,12 @@ namespace AGL.DeveloperTest.ConsoleTester
             _consoleFormatterOwner = consoleFormatterOwner;
         }
 
-        public async Task Run()
+        public async Task Run(IConfigurationRoot configurationRoot)
         {
-            string urlPeopleJSON = "";
-            IConfigurationRoot config = ConfigHelper.ConfigBuild();
-            urlPeopleJSON = ConfigHelper.GetURLByEndpoint(config, "people");
+            // Let the build config happen in main and get a reference to it.
+            _configurationRoot = configurationRoot;
+
+            string urlPeopleJSON = ConfigBuildHelper.GetURLByEndpoint(_configurationRoot, "people");
             // _logger.LogInformation($"{urlPeopleJSON }");
 
             // Get Data via service
@@ -43,7 +47,7 @@ namespace AGL.DeveloperTest.ConsoleTester
 
             // Console write data with formatter
             // _consoleFormatterOwner.DisplayAllByGender(listOwnerGrouping);
-            _consoleFormatterOwner.DisplayAllByGenderPets(listOwnerGrouping);
+            _consoleFormatterOwner.DisplayAllByGenderPets(listOwnerGrouping.ToList());
 
             Console.ReadKey();
         }

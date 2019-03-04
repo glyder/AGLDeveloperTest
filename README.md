@@ -29,6 +29,8 @@ ConsoleTester:
     Use one of the console formatters to display the data the way you like.
     For this case, as per AGL dev test requirements:
         "output a list of all the cats in alphabetical order under a heading of the gender of their owner."
+    Injectable Services - pipeline for console
+    
     
 XUnitTests:
 
@@ -42,6 +44,7 @@ Packages of interest:
     SkippableFact - allows you to use [SkippableFact] instead of [Fact] and 
                     you can use Skip.<xyz> within a Tests to dynamically 
                     Skip the Test during runtime.
+                    I hooked this up to the integrationLive tests.
 
     Required to setup ConsoleApp:
       "dependencies": {
@@ -60,9 +63,12 @@ Packages of interest:
 TODO:
 
     Part of TDD is -> Red, Green and REFACTOR
-    Project can be safely refactored. One area is dynamic LINQ properties to functions.  
-    Nulls, bad data not completely catered for.
-    Injectable Services - pipeline for console was a little bit more that I bargained for.
-        WebAPI it's build for you. Since i'm asked in interviews I will attempt to finish soon.
-    Add WebAPI and an Angular 2+ project to consume and display.
-        Though most my Angular projects are on disk and "Pluralsight"/Work related, I should add this soon.
+    Project can be safely refactored with some key areas I may work over time. 
+        One area is dynamic LINQ properties to functions (.  
+        Nulls, bad data not completely catered for.
+    
+    Console -> WebAPI -> Service.
+    Angular -> WebAPI -> Service
+        Add WebAPI and an Angular 2+ project to consume and display.
+        Though most my Angular projects are on disk and "Pluralsight"/Work related, 
+        I should add this soon.

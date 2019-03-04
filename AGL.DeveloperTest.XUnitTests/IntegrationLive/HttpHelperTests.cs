@@ -1,12 +1,7 @@
 ﻿using Xunit;
 
-using System.Net.Http;
-
-// using RichardSzalay.MockHttp;
-
 using AGL.DeveloperTest.Core;
 using AGL.Base;
-using System.IO;
 
 namespace IntegrationTests
 {
@@ -19,7 +14,8 @@ namespace IntegrationTests
 
         #endregion
 
-        [Theory]
+        [SkippableTheory]
+        //[Theory]
         [InlineData(GOOGLEURL, "<!doctype html>", "doctype")]
         [InlineData(AGLWEBURL, "[{\"name\":\"Bob\",\"gender\":\"Male\",", "gender")]
         [Trait("Category", "IntegrationLive")]
@@ -27,9 +23,11 @@ namespace IntegrationTests
                                                      string expectedStartsWith,
                                                      string expectedContains)
         {
+            Skip.If(base.stopIntegrationLiveTests);
+
             // Arrange
             string responseText = "";
-            IHttpClient client = new HttpHelper();
+            IHttpClient client = new HttpClientHelper();
 
             // Act 
             responseText = await client.Get(url);
@@ -40,13 +38,16 @@ namespace IntegrationTests
             Assert.Contains(expectedContains, responseText);
         }
 
-        [Fact]
+        [SkippableFact]
+        // [Fact]
         [Trait("Category", "IntegrationLive")]
         public async void GetJSONContent_FromAGLUrl_True()
         {
+            Skip.If(base.stopIntegrationLiveTests);
+
             // Arrange
             string responseText = "";
-            IHttpClient client = new HttpHelper();
+            IHttpClient client = new HttpClientHelper();
 
             // Act 
             responseText = await client.Get(AGLWEBURL);

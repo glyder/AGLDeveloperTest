@@ -8,6 +8,12 @@ using AGL.DeveloperTest.Core;
 
 namespace AGL.Base
 {
+    public enum MockHttpMessageHandlerObjectType
+    {
+        FilePath,
+        ReturnContent
+    }
+
     public class MockHttpMessageHandler : HttpMessageHandler
     {
         string _path = "";
@@ -18,7 +24,8 @@ namespace AGL.Base
 
         }
 
-        public MockHttpMessageHandler(MockHttpMessageHandlerObjectType type, string objectType)
+        public MockHttpMessageHandler(MockHttpMessageHandlerObjectType type, 
+                                      string objectType)
         {
             switch(type)
             {
@@ -64,11 +71,5 @@ namespace AGL.Base
 
             return await Task.FromResult(responseMessage);
         }
-    }
-
-    public enum MockHttpMessageHandlerObjectType
-    {
-        FilePath,
-        ReturnContent
     }
 }
